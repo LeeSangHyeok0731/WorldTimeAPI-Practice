@@ -2,7 +2,7 @@ type TimeApi = {
   datetime?: string;
 };
 
-const WorldTimeApi = async (timezone: string): Promise<string> => {
+const UseWorldTimeApi = async (timezone: string): Promise<string> => {
   try {
     const response = await fetch(
       `https://worldtimeapi.org/api/timezone/${timezone}`
@@ -18,4 +18,4 @@ const WorldTimeApi = async (timezone: string): Promise<string> => {
   }
 };
 
-export default WorldTimeApi;
+export default UseWorldTimeApi;
