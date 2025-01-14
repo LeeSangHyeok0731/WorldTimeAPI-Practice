@@ -8,7 +8,6 @@ function WorldTimeComponent() {
   const [date, setDate] = useState<string>("날짜");
   const [clock, setClock] = useState<string>("시간");
 
-  // 타임존 변경 시마다 시간 업데이트
   useEffect(() => {
     const fetchTime = async () => {
       const currentTime = await UseWorldTimeApi(timeZone);
@@ -17,12 +16,27 @@ function WorldTimeComponent() {
     fetchTime();
   }, [timeZone]);
 
-  // 시간 데이터를 나누어 로그 출력
   useEffect(() => {
     if (time && time.includes("T")) {
       const splitTime = time.split("T");
-      setDate(`날짜: ${splitTime[0].split("-")}`); // 날짜 출력
-      setClock(`시간: ${splitTime[1].slice(0, 8)}`); // 시간 출력
+
+      const year = splitTime[0]
+        .split("-")
+        .map((x, index) => {
+          return index === 0 ? `${x}년` : index === 1 ? `${x}월` : `${x}일`;
+        })
+        .join("");
+
+      const hour = splitTime[1]
+        .slice(0, 8)
+        .split(":")
+        .map((x, index) => {
+          return index === 0 ? `${x}시` : index === 1 ? `${x}분` : `${x}초`;
+        })
+        .join("");
+
+      setDate(`날짜: ${year}`); // 날짜 출력
+      setClock(`시간: ${hour}`); // 시간 출력
     }
   }, [time]);
 
