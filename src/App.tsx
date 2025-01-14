@@ -1,9 +1,9 @@
-import WorldTimeApi from "./api/worldTimeApi";
+import WorldTimeComponent from "./components/worldTimeApi";
 
 function App() {
   return (
     <>
-      <WorldTimeApi />
+      <WorldTimeComponent />
     </>
   );
 }
